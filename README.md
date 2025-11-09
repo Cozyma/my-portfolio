@@ -27,12 +27,12 @@
 ローカル環境は本番環境の「低コスト」とは目的が異なり、「開発のしやすさと統一性」を目的とします。`docker-compose.yml` により、以下の環境を構築します。
 
 - フロントエンド: Node.js コンテナ (React 開発サーバー/Vite)
-- バックエンド: Laravel 実行環境。
-  - 現状: PHP 8.2 + Composer（`php artisan serve`）、Nginx + PHP-FPM へ移行予定。
+- バックエンド: Laravel 実行環境（Nginx + PHP-FPM, PHP 8.2）
 
 ## 3. 使用技術 (Tech Stack)
 
 - フロントエンド: React (Vite)
+- UI: Tailwind CSS
 - バックエンド: Laravel
 - インフラ (本番): AWS (S3, CloudFront, API Gateway, Lambda)
 - デプロイツール: Bref, Serverless Framework
@@ -52,7 +52,7 @@ cd [プロジェクト名]
 
 ### 2. バックエンドの初期化 (初回のみ)
 
-まだ `backend/` に Laravel を作成していない場合は、コンテナ経由で初期化します。
+まだ `backend/laravel` に Laravel を作成していない場合は、コンテナ経由で初期化します。
 
 ```bash
 docker compose run --rm backend composer create-project laravel/laravel .
@@ -63,7 +63,7 @@ docker compose run --rm backend composer create-project laravel/laravel .
 バックエンド用の設定ファイルをコピーします。
 
 ```bash
-cd backend
+cd backend/laravel
 cp .env.example .env
 ```
 
@@ -81,10 +81,13 @@ docker compose up -d --build
 ### 5. 依存関係のインストールと初期設定 (初回のみ)
 
 ```bash
-# バックエンド (Laravel) のアプリケーションキーの生成
+# バックエンド (Laravel) の依存関係インストール（初回クローン時は必要）
+docker compose exec backend composer install
+
+# アプリケーションキーの生成
 docker compose exec backend php artisan key:generate
 
-# フロントエンド (React) の依存関係をインストール（yarn）
+# フロントエンド (React) の依存関係インストール（コンテナ起動時に自動でも実行されます）
 docker compose exec frontend yarn install
 ```
 
@@ -110,9 +113,7 @@ docker compose run --rm -u $(id -u):$(id -g) backend composer create-project lar
 ### 7. アクセス
 
 - フロントエンド (React): `http://localhost:5173`
-- バックエンド (Laravel API): `http://localhost:8000` （現状）
-
-Nginx + PHP-FPM 化後は `http://localhost:8080` を予定しています（後述のコンテナ整備時に反映）。
+- バックエンド (Laravel API): `http://localhost:8080`
 
 ## 5. デプロイ
 
@@ -127,3 +128,16 @@ Nginx + PHP-FPM 化後は `http://localhost:8080` を予定しています（後
 ---
 
 このテンプレートをベースに、随時更新します。プロジェクト名や各種 URL は環境に合わせて編集してください。
+
+## 補足: フロントエンド UI（Tailwind）
+
+- 本リポジトリはフロントエンドに Tailwind CSS を導入済みです。
+- 主要ファイル
+  - `frontend/tailwind.config.js`: コンテンツスキャン設定
+  - `frontend/postcss.config.js`: PostCSS プラグイン設定
+  - `frontend/src/index.css`: `@tailwind base; @tailwind components; @tailwind utilities;`
+- 実行
+  - `docker compose up -d frontend` で Vite dev サーバーが起動し、Tailwind が反映されます。
+- コンポーネントライブラリ（任意）
+  - 迅速に UI を組む場合は DaisyUI などのプラグインを追加可能です。
+  - 例: `docker compose exec frontend yarn add -D daisyui` を実行し、`tailwind.config.js` の `plugins` に `require('daisyui')` を追加します。
