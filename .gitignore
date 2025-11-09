@@ -1,0 +1,33 @@
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Env
+.env
+**/.env
+
+# Node
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Laravel / PHP
+vendor/
+**/vendor/
+storage/
+backend/laravel/storage/
+bootstrap/cache/
+backend/laravel/bootstrap/cache/
+.phpunit.result.cache
+composer.phar
+
+# Build artifacts
+dist/
+coverage/
+
+# Serverless
+.serverless/
+.bref/
