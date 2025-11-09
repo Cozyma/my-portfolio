@@ -6,9 +6,11 @@
   - `docs/decisions/`: 重要な変更点・判断理由の記録
   - `README.md`: ローカルセットアップ、ポート、日常的なコマンド
 
-現在の基礎構成に関するドキュメント
+現在の基礎構成/フロントUI方針に関するドキュメント
 - Tailwind + Vite の導入、バックエンドコンテナ（Nginx + PHP-FPM）構成、README 更新内容は以下にまとめています。
   - `docs/decisions/2025-11-09-initial-setup-and-tailwind.md`
+- フロントエンド UI 方針（DaisyUI + shadcn/ui の折衷）は以下にまとめています。
+  - `docs/decisions/2025-11-09-ui-strategy-daisyui-and-shadcn.md`
 
 貢献ルール（メモ）
 - 構成やツールに関する重要な変更を行った際は、`docs/decisions/` に短い記録を追加し、PR/コミットから参照してください。

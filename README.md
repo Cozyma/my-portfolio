@@ -33,6 +33,8 @@
 
 - フロントエンド: React (Vite)
 - UI: Tailwind CSS
+  - DaisyUI をプラグインとして追加（共通UIの初速向上）
+  - 高度UI（Dialog/Popover など）は shadcn/ui（Radix）を段階導入予定
 - バックエンド: Laravel
 - インフラ (本番): AWS (S3, CloudFront, API Gateway, Lambda)
 - デプロイツール: Bref, Serverless Framework
@@ -138,6 +140,9 @@ docker compose run --rm -u $(id -u):$(id -g) backend composer create-project lar
   - `frontend/src/index.css`: `@tailwind base; @tailwind components; @tailwind utilities;`
 - 実行
   - `docker compose up -d frontend` で Vite dev サーバーが起動し、Tailwind が反映されます。
-- コンポーネントライブラリ（任意）
-  - 迅速に UI を組む場合は DaisyUI などのプラグインを追加可能です。
-  - 例: `docker compose exec frontend yarn add -D daisyui` を実行し、`tailwind.config.js` の `plugins` に `require('daisyui')` を追加します。
+- コンポーネント方針（折衷）
+  - DaisyUI をプラグインとして導入済み。テーマ切替（`data-theme`）や `btn`/`card` などの共通 UI を素早く構築します。
+  - 高度な UI（Dialog, Popover, Combobox など）は shadcn/ui（Radix）を段階導入予定。
+  - DaisyUI のテーマ切替例: `<html data-theme="dark">` または JS で `document.documentElement.setAttribute('data-theme', 'dark')`
+  - shadcn/ui を導入する際の依存（参考）:
+    - `class-variance-authority tailwind-merge @radix-ui/react-dialog @radix-ui/react-popover lucide-react`
