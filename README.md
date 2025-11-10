@@ -108,12 +108,13 @@ docker compose exec backend php artisan key:generate
 docker compose exec frontend yarn install
 ```
 
-### 7. 権限の初期化（初回のみ）
+### 7. 権限の初期化（自動化済み）
 
-初回セットアップ後、`storage` と `bootstrap/cache` の書き込み権限を整えます。
+バックエンドコンテナ起動時に `storage` と `bootstrap/cache` の権限を自動で調整します。
+エラーが出る場合のみ、以下のコマンドを手動で実行してください。
 
 ```bash
-docker compose run --rm -u root backend bash -lc 'cd /app && \
+docker compose exec -u root backend bash -lc 'cd /app && \
   mkdir -p storage/framework/{cache,views,sessions} && \
   chown -R www-data:www-data storage bootstrap/cache && \
   find storage -type d -exec chmod 775 {} + && \

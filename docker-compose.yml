@@ -15,12 +15,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     working_dir: /app
     volumes:
       - ./backend/laravel:/app
     command: >-
       bash -lc 'if [ -f artisan ]; then
+        mkdir -p storage/framework/{cache,views,sessions} && \
+        chown -R www-data:www-data storage bootstrap/cache && \
+        find storage -type d -exec chmod 775 {} + && \
+        find storage -type f -exec chmod 664 {} + && \
+        chmod -R 775 bootstrap/cache && \
         php-fpm -F;
       else
         echo "[backend] Laravel not initialized. Run: docker compose run --rm backend composer create-project laravel/laravel .";
