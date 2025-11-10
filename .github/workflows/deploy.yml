@@ -1,0 +1,88 @@
+name: Deploy Portfolio to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  ###################################
+  # Job 1: フロントエンド (React) のデプロイ
+  ###################################
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: frontend/yarn.lock
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_GITHUB_ACTIONS_ROLE_NAME # ★ 要設定
+          aws-region: ap-northeast-1
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: yarn install --frozen-lockfile
+
+      - name: Build React App
+        working-directory: frontend
+        run: yarn build
+
+      - name: Deploy to S3
+        run: aws s3 sync frontend/dist s3://YOUR_S3_BUCKET_NAME --delete # ★ 要設定
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id YOUR_CLOUDFRONT_DISTRIBUTION_ID --paths "/*" # ★ 要設定
+
+  ###################################
+  # Job 2: バックエンド (Laravel/Bref) のデプロイ
+  ###################################
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, mbstring, zip, pdo, pdo_mysql, bcmath
+          tools: composer
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js (for Serverless CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::YOUR_AWS_ACCOUNT_ID:role/YOUR_GITHUB_ACTIONS_ROLE_NAME # ★ 要設定
+          aws-region: ap-northeast-1
+
+      - name: Install Serverless CLI
+        run: npm install -g serverless
+
+      - name: Install Composer dependencies
+        working-directory: backend/laravel
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Deploy with Serverless (Bref)
+        working-directory: backend/laravel
+        run: serverless deploy --stage prod --region ap-northeast-1
+
