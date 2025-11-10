@@ -177,3 +177,7 @@ npx serverless deploy --stage prod --region ap-northeast-1
   - DaisyUI のテーマ切替例: `<html data-theme="dark">` または JS で `document.documentElement.setAttribute('data-theme', 'dark')`
   - shadcn/ui を導入する際の依存（参考）:
     - `class-variance-authority tailwind-merge @radix-ui/react-dialog @radix-ui/react-popover lucide-react`
+
+## 付録: デプロイ設定ガイド
+
+GitHub Actions（OIDC）での本番デプロイ設定手順は `docs/deploy-setup.md` を参照してください。
