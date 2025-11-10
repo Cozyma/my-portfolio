@@ -8,6 +8,6 @@
 - 例外/エラー: `error-handling.md`
 - 環境変数/設定: `env-and-config.md`
 - テスト: `testing.md`
+- 契約/OpenAPI: `contracts-and-openapi.md`
 
 各章は最小限・局所的な運用を前提に記述しています。
-
