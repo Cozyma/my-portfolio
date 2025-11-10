@@ -1,0 +1,58 @@
+service: my-portfolio-laravel
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: provided.al2
+  stage: ${opt:stage, 'prod'}
+  environment:
+    APP_ENV: production
+    APP_DEBUG: false
+    APP_STORAGE: /tmp
+    LOG_CHANNEL: stderr
+    LOG_LEVEL: info
+    CACHE_STORE: file
+    SESSION_DRIVER: cookie
+    VIEW_COMPILED_PATH: /tmp/storage/framework/views
+
+plugins:
+  - ./vendor/bref/bref
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!tests/**'
+    - '!storage/**'
+    - '!database/*.sqlite'
+    - 'public/**'
+    - 'bootstrap/**'
+    - 'vendor/**'
+    - 'app/**'
+    - 'config/**'
+    - 'database/**'
+    - 'resources/**'
+    - 'routes/**'
+    - 'artisan'
+    - 'composer.json'
+    - 'composer.lock'
+
+functions:
+  web:
+    handler: public/index.php
+    timeout: 28
+    memorySize: 1024
+    layers:
+      - ${bref:layer.php-82-fpm}
+    events:
+      - httpApi: '*'
+
+  artisan:
+    handler: artisan
+    timeout: 120
+    memorySize: 1024
+    layers:
+      - ${bref:layer.php-82}
+    # 手動実行想定（イベントはバインドしない）
+

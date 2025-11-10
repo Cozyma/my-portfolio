@@ -52,7 +52,22 @@ git clone [リポジトリのURL]
 cd [プロジェクト名]
 ```
 
-### 2. バックエンドの初期化 (初回のみ)
+### 2. 所有権の準備（初回推奨）
+
+コンテナが生成するファイルをホストユーザー所有に統一するため、Compose に UID/GID を渡します。
+
+```bash
+cp .env.example .env
+# 必要に応じて .env の HOST_UID/HOST_GID を編集（通常は 1000:1000）
+```
+
+既に root 所有のファイルがある場合は以下で修正できます（sudo が必要）。
+
+```bash
+bash scripts/fix-ownership.sh backend/laravel frontend
+```
+
+### 3. バックエンドの初期化 (初回のみ)
 
 まだ `backend/laravel` に Laravel を作成していない場合は、コンテナ経由で初期化します。
 
@@ -60,7 +75,7 @@ cd [プロジェクト名]
 docker compose run --rm backend composer create-project laravel/laravel .
 ```
 
-### 3. 環境変数の設定
+### 4. 環境変数の設定
 
 バックエンド用の設定ファイルをコピーします。
 
@@ -71,7 +86,7 @@ cp .env.example .env
 
 必要に応じてフロントエンド側も `.env` を用意してください。
 
-### 4. Docker コンテナの起動
+### 5. Docker コンテナの起動
 
 プロジェクトのルートディレクトリに戻り、Docker Compose を実行します。
 
@@ -80,7 +95,7 @@ cd ..
 docker compose up -d --build
 ```
 
-### 5. 依存関係のインストールと初期設定 (初回のみ)
+### 6. 依存関係のインストールと初期設定 (初回のみ)
 
 ```bash
 # バックエンド (Laravel) の依存関係インストール（初回クローン時は必要）
@@ -93,7 +108,7 @@ docker compose exec backend php artisan key:generate
 docker compose exec frontend yarn install
 ```
 
-### 6. 権限の初期化（初回のみ）
+### 7. 権限の初期化（初回のみ）
 
 初回セットアップ後、`storage` と `bootstrap/cache` の書き込み権限を整えます。
 
@@ -112,7 +127,7 @@ docker compose run --rm -u root backend bash -lc 'cd /app && \
 docker compose run --rm -u $(id -u):$(id -g) backend composer create-project laravel/laravel .
 ```
 
-### 7. アクセス
+### 8. アクセス
 
 - フロントエンド (React): `http://localhost:5173`
 - バックエンド (Laravel API): `http://localhost:8080`
@@ -126,6 +141,22 @@ docker compose run --rm -u $(id -u):$(id -g) backend composer create-project lar
 2. バックエンド: `serverless deploy` (Bref) を実行し、Lambda と API Gateway に Laravel アプリケーションをデプロイ。
 
 将来的にワークフローが整備されたら、この節に具体的な Workflow 定義と環境変数を追記します。
+
+### 補足: Bref/Serverless の手動デプロイ準備
+
+```bash
+# 依存を追加（インストールは任意のタイミングで）
+docker compose exec backend composer require bref/bref bref/laravel-bridge
+
+# デプロイ（AWS 資格情報が必要）
+cd backend/laravel
+npx serverless deploy --stage prod --region ap-northeast-1
+```
+
+### 本番 API エンドポイント（プレースホルダ）
+
+- API (HTTP API): https://{api-id}.execute-api.ap-northeast-1.amazonaws.com
+  - カスタムドメインを設定した場合は、その URL をここに記載してください。
 
 ---
 
