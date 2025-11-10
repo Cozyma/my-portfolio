@@ -45,6 +45,9 @@ jobs:
       - name: Build React App
         working-directory: frontend
         run: yarn build
+        env:
+          # GitHub リポジトリ変数 vars.API_BASE_URL を Vite の環境変数へ注入
+          VITE_API_BASE_URL: ${{ env.API_BASE_URL || vars.API_BASE_URL }}
 
       - name: Deploy to S3
         run: aws s3 sync frontend/dist s3://$S3_BUCKET --delete

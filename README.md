@@ -143,6 +143,8 @@ docker compose run --rm -u $(id -u):$(id -g) backend composer create-project lar
 
 将来的にワークフローが整備されたら、この節に具体的な Workflow 定義と環境変数を追記します。
 
+注意: GitHub Actions のデプロイワークフローは現時点で未検証（unverified）です。実運用前にステージング／検証用ブランチで動作確認を行ってください。詳細は `docs/deploy-setup.md` を参照してください。
+
 ### 補足: Bref/Serverless の手動デプロイ準備
 
 ```bash

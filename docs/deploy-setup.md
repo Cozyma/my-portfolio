@@ -2,6 +2,8 @@
 
 この文書は、本リポジトリのワークフロー（`.github/workflows/deploy.yml`）で本番デプロイを行うための初期設定手順をまとめたものです。
 
+注意: 本ワークフローは現時点で未検証（unverified）です。実運用前にステージング／検証用ブランチで挙動を確認してください。
+
 ## 概要
 - 認証: GitHub OIDC で AWS IAM ロールを引き受け（AssumeRole）
 - フロント: Vite ビルド → S3 へ同期 → CloudFront 無効化
@@ -96,6 +98,9 @@
   - `AWS_OIDC_ROLE_ARN` 例: `arn:aws:iam::123456789012:role/GitHubActions-DeployRole`
   - `S3_BUCKET` 例: `my-portfolio-frontend-prod`
   - `CF_DISTRIBUTION_ID` 例: `E123ABC456DEF`
+  - `API_BASE_URL` 例: `https://{api-id}.execute-api.ap-northeast-1.amazonaws.com/api`
+
+フロントエンドのビルド時に `API_BASE_URL` を `VITE_API_BASE_URL` として注入します（Vite）。
 
 ## 4) バックエンドの初期インストール（初回のみ）
 ```
@@ -123,4 +128,3 @@ composer install --no-dev --optimize-autoloader
 - `.github/workflows/deploy.yml`（本番デプロイワークフロー定義）
 - `backend/laravel/serverless.yml`（Bref/Serverless 設定）
 - `docs/decisions/2025-11-10-bref-introduction.md`
-
