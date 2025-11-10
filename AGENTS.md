@@ -51,9 +51,9 @@
 - ローカル検証: `curl http://localhost:8080/api/health` で疎通、フロントは `frontend/.env` の `VITE_API_BASE_URL` を確認。
 
 詳細ガイドライン（常時参照先）
-- バックエンド実装ガイドライン: `docs/guidelines/backend.md`
-- フロントエンド実装ガイドライン: `docs/guidelines/frontend.md`
+- バックエンド: `docs/guidelines/backend/README.md`（章立てに分割）
+- フロントエンド: `docs/guidelines/frontend/README.md`（章立てに分割）
 
 分量が増えた場合の分割方針
-- ガイドラインは `docs/guidelines/` 配下で細分化します（例: `docs/guidelines/backend/`, `docs/guidelines/frontend/`）。
-- 章立てや機能別の分割を行う際も「最小限・局所的」の原則を維持してください。
+- ガイドラインは `docs/guidelines/` 配下で細分化します（既に backend/ と frontend/ に分割済み）。
+- さらに章の増加や詳細化が必要になれば、サブディレクトリで細分化してください（例: `docs/guidelines/backend/errors/`）。
