@@ -90,6 +90,12 @@ jobs:
       - name: Install Serverless CLI
         run: npm install -g serverless
 
+      - name: Ensure bootstrap/cache exists and writable
+        working-directory: backend/laravel
+        run: |
+          mkdir -p bootstrap/cache
+          chmod -R 777 bootstrap/cache
+
       - name: Install Composer dependencies
         working-directory: backend/laravel
         run: composer install --no-dev --optimize-autoloader
