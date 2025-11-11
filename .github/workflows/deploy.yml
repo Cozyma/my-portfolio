@@ -48,9 +48,11 @@ jobs:
         env:
           # GitHub リポジトリ変数 vars.API_BASE_URL を Vite の環境変数へ注入
           VITE_API_BASE_URL: ${{ env.API_BASE_URL || vars.API_BASE_URL }}
+          # サイトのベースURL（例: https://example.com）
+          SITE_BASE_URL: ${{ env.SITE_BASE_URL || vars.SITE_BASE_URL }}
 
-      - name: Deploy to S3
-        run: aws s3 sync frontend/dist s3://$S3_BUCKET --delete
+      - name: Deploy to S3 (SSG client artifacts)
+        run: aws s3 sync frontend/dist/client s3://$S3_BUCKET --delete
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths "/*"
