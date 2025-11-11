@@ -87,8 +87,8 @@ jobs:
           role-to-assume: ${{ env.AWS_OIDC_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Install Serverless CLI
-        run: npm install -g serverless
+      - name: Install Serverless CLI (v3)
+        run: npm install -g serverless@3
 
       - name: Ensure bootstrap/cache exists and writable
         working-directory: backend/laravel
