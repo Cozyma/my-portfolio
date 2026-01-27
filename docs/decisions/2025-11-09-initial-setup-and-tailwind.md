@@ -1,3 +1,9 @@
+---
+title: 初期セットアップ、バックエンドコンテナ構成、Tailwind導入
+description: Docker Composeによるローカル開発基盤整備とTailwind CSS導入の記録
+tags: [ADR, Docker, Tailwind, 環境構築]
+---
+
 # 初期セットアップ、バックエンドコンテナ構成、Tailwind 導入（2025-11-09）
 
 概要

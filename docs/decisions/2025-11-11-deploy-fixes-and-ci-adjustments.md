@@ -1,3 +1,9 @@
+---
+title: デプロイ成功までの修正経緯
+description: S3/CloudFront + API Gateway構成の初回デプロイ成功までの修正点まとめ
+tags: [ADR, デプロイ, CI/CD, トラブルシューティング]
+---
+
 # 2025-11-11: デプロイ成功までの修正経緯（フロント/バック/CI）
 
 本ドキュメントは、S3/CloudFront + API Gateway(Lambda/Bref) 構成における初回デプロイ成功までの修正点を時系列でまとめたものです。AGENTS.md の「最小差分」方針に従い、目的に直結する変更のみを加えています。

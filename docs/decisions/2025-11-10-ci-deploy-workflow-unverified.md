@@ -1,3 +1,9 @@
+---
+title: CIデプロイワークフロー追加（未検証）
+description: GitHub ActionsによるOIDC認証でのフロント/バック自動デプロイ設定
+tags: [ADR, CI/CD, GitHub Actions, AWS]
+---
+
 # 2025-11-10: CI デプロイワークフロー追加（未検証・env 管理）
 
 目的: main への push をトリガーに、フロント（S3/CloudFront）とバック（Lambda/Bref）を GitHub Actions で自動デプロイする。

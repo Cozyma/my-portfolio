@@ -1,3 +1,9 @@
+---
+title: フロントエンドUI方針（DaisyUI + shadcn/ui折衷）
+description: UI実装の初速と拡張性を両立するためのDaisyUIとshadcn/uiの使い分け方針
+tags: [ADR, フロントエンド, UI, DaisyUI, shadcn]
+---
+
 # フロントエンド UI 方針（DaisyUI + shadcn/ui 折衷）
 
 目的

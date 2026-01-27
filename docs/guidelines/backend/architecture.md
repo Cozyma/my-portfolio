@@ -1,3 +1,9 @@
+---
+title: アーキテクチャ（Layered）
+description: Controller → Service → Repositoryのレイヤード構成方針
+tags: [ガイドライン, バックエンド, アーキテクチャ]
+---
+
 # アーキテクチャ（Layered）
 
 - レイヤー: Controller → Service → Repository（Interface 経由で DI）

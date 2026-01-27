@@ -1,3 +1,9 @@
+---
+title: デプロイ設定手順
+description: GitHub Actions + OIDCによるAWSへの自動デプロイ設定手順
+tags: [運用, デプロイ, CI/CD, AWS, GitHub Actions]
+---
+
 # デプロイ設定手順（GitHub Actions + OIDC + AWS）
 
 この文書は、本リポジトリのワークフロー（`.github/workflows/deploy.yml`）で本番デプロイを行うための初期設定手順をまとめたものです。

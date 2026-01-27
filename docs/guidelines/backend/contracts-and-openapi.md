@@ -1,3 +1,9 @@
+---
+title: 契約/OpenAPI
+description: API契約の明文化とOpenAPIスキーマ管理方針
+tags: [ガイドライン, バックエンド, OpenAPI, API契約]
+---
+
 # 契約 / OpenAPI
 
 目的: API 契約を明文化し、フロント/バック間の合意を維持する。

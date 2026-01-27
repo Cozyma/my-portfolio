@@ -1,3 +1,9 @@
+---
+title: Bref for Laravel on AWS Lambda導入
+description: 本番バックエンドをAWS Lambda + API Gatewayに載せるためのBref導入決定
+tags: [ADR, バックエンド, AWS, Lambda, Bref]
+---
+
 # 2025-11-10: Introduce Bref for Laravel on AWS Lambda
 
 目的: 本番環境のバックエンドを AWS Lambda + API Gateway に載せるため、Laravel に Bref を導入する。

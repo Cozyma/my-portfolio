@@ -1,3 +1,9 @@
+---
+title: ローカル開発のファイル所有権戦略
+description: コンテナ生成ファイルのroot所有を防ぎ編集しやすい所有権を維持する方針
+tags: [ADR, Docker, 開発環境]
+---
+
 # 2025-11-10: Ownership Strategy for Local Dev & Codex CLI
 
 目的: コンテナ実行で生成されるファイルの root 所有を防ぎ、CodexCLI/開発者が編集しやすい所有権を維持する。

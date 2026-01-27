@@ -1,3 +1,9 @@
+---
+title: SSG戦略の選定（Vite vs Next.js）
+description: Vite + vite-plugin-ssrを採用しS3静的配信でSSGを実現する決定
+tags: [ADR, フロントエンド, SSG, Vite]
+---
+
 # SSG 戦略の選定: Vite（vite-plugin-ssr） vs Next.js staticExport
 
 日付: 2025-11-11

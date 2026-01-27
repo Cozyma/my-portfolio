@@ -1,3 +1,9 @@
+---
+title: ルーティング
+description: Laravel APIルーティングの構成方針
+tags: [ガイドライン, バックエンド, ルーティング]
+---
+
 # ルーティング
 
 - v0 では `routes/web.php` に `Route::prefix('api')` 配下で API を定義。

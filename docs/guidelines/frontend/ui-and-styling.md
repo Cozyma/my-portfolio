@@ -1,3 +1,9 @@
+---
+title: UI/スタイリング
+description: Tailwind + DaisyUIを基本としたUI/スタイリング方針
+tags: [ガイドライン, フロントエンド, UI, Tailwind, DaisyUI]
+---
+
 # UI/スタイリング
 
 - 基本は Tailwind + DaisyUI。
