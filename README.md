@@ -130,8 +130,8 @@ docker compose run --rm -u $(id -u):$(id -g) backend composer create-project lar
 
 ### 8. アクセス
 
-- フロントエンド (React): `http://localhost:5173`
-- バックエンド (Laravel API): `http://localhost:8080`
+- フロントエンド (React): `http://localhost:5373`
+- バックエンド (Laravel API): `http://localhost:8300`
 
 ## 5. デプロイ
 

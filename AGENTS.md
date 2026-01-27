@@ -48,7 +48,7 @@
 
 運用メモ
 - 重要な構成変更は `docs/decisions/` に短く記録し、この AGENTS.md と一貫性を保つ。
-- ローカル検証: `curl http://localhost:8080/api/health` で疎通、フロントは `frontend/.env` の `VITE_API_BASE_URL` を確認。
+- ローカル検証: `curl http://localhost:8300/api/health` で疎通、フロントは `frontend/.env` の `VITE_API_BASE_URL` を確認。
 
 詳細ガイドライン（常時参照先）
 - バックエンド: `docs/guidelines/backend/README.md`（章立てに分割）
