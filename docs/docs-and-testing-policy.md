@@ -60,3 +60,20 @@ tags: [タグ1, タグ2]
 - テストケースの説明は日本語で記載
 - モックを使用して依存を分離
 - 時間依存のテストは固定時刻で実行
+
+### 禁止事項
+
+- `DatabaseTransactions` trait（複数DB接続で信頼性が低い）
+- `RefreshDatabase` trait（本番/開発データを破壊する）
+- トランザクションなしのDB操作（データ汚染の原因）
+
+### Seeder設計
+
+- **冪等性必須**: 何度実行しても同一結果
+- 存在チェック型: `if (!Model::where(...)->exists())`
+- 削除再作成型: `Model::whereIn(...)->delete()` → `insert`
+
+### 詳細ドキュメント
+
+- バックエンド: `docs/decisions/2026-01-28-backend-testing-policy.md`
+- フロントエンド: `docs/decisions/2026-01-28-frontend-testing-environment.md`
