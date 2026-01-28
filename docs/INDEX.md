@@ -25,6 +25,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2025-11-11-deploy-fixes-and-ci-adjustments.md` | デプロイ成功までの修正経緯 | ADR, デプロイ, CI/CD, トラブルシューティング |
 | `docs/decisions/2025-11-11-ssg-strategy-vite-vs-next.md` | SSG戦略の選定（Vite vs Next.js） | ADR, フロントエンド, SSG, Vite |
 | `docs/decisions/2026-01-28-frontend-testing-environment.md` | フロントエンドテスト環境構築（Playwright + Vitest） | ADR, テスト, フロントエンド, Playwright, Vitest |
+| `docs/decisions/2026-01-28-backend-testing-environment.md` | バックエンドテスト環境構築（PHPUnit） | ADR, テスト, バックエンド, PHPUnit, Laravel |
 
 ## guidelines/
 
