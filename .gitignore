@@ -31,3 +31,7 @@ coverage/
 # Serverless
 .serverless/
 .bref/
+
+# Playwright
+/playwright-report/
+/test-results/
